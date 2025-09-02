@@ -1,6 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
-  background-color: rgba(78, 78, 78, 0.068);
   font-family: "Almarai", sans-serif;
 }

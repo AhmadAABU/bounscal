@@ -70,6 +70,22 @@ export default function CommissionCalculator() {
   const [level, setLevel] = useState("Basic");
   const [monthlyDiamonds, setMonthlyDiamonds] = useState(0);
   const [monthlyIncome, setMonthlyIncome] = useState(0);
+  const [dark, setDarkMode] = useState(() => {
+    return localStorage.getItem("theme") === "dark";
+  });
+  function toggleDarkMode() {
+    setDarkMode((prev) => !prev);
+  }
+
+  useEffect(() => {
+    if (dark) {
+      document.body.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [dark]);
 
   useEffect(() => {
     const d = Number(monthlyDiamonds) || 0;
@@ -94,17 +110,22 @@ export default function CommissionCalculator() {
   const finalSalary = Number(monthlyIncome) + streamerBonus;
 
   return (
-    <div className="flex h-screen justify-center items-center px-4 md:px-0 ">
-      <div className="w-full max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-md">
+    <div className="bg-[#f3f3f3] flex h-screen justify-center items-center px-4 md:px-0 dark:bg-[#081020]">
+      <div className="w-full max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-md relative dark:bg-gray-800 dark:text-gray-100 ">
+        <div className="absolute bottom-0 right-0 pr-2.5 pb-2.5">
+          <button className="toggle-mode text-md" onClick={toggleDarkMode}>
+            {dark ? "🌞" : "🌙"}
+          </button>
+        </div>
         <h2 className="text-xl font-semibold mb-4 text-center">
           حساب مكافأة صانع المحتوى لوكالة جو
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-x-6 gap-y-3 mb-6 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-x-6 gap-y-3 mb-6 items-center ">
           <label className="text-md">المستوى</label>
           <select
             value={level}
             onChange={(e) => setLevel(e.target.value)}
-            className="border rounded-md px-3 py-2 text-md"
+            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700"
           >
             {Object.keys(TIERS).map((k) => (
               <option key={k} value={k}>
@@ -119,7 +140,7 @@ export default function CommissionCalculator() {
             min={0}
             value={monthlyDiamonds}
             onChange={(e) => setMonthlyDiamonds(e.target.value)}
-            className="border rounded-md px-3 py-2 text-md"
+            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700"
           />
 
           <label className="text-md">الراتب بالدولار بدون مكافأة</label>
@@ -127,12 +148,12 @@ export default function CommissionCalculator() {
             type="number"
             value={monthlyIncome.toFixed(2)}
             readOnly
-            className="border rounded-md px-3 py-2 text-md bg-gray-100"
+            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700"
           />
         </div>
-        <div className="bg-gray-50 border rounded-lg p-4 space-y-3 text-md">
+        <div className="bg-gray-50 border rounded-lg p-4 space-y-3 text-md dark:bg-gray-700  dark:text-gray-100">
           <div className="flex justify-between border-b border-dashed pb-2">
-            <span className="text-gray-700">Matched Tier</span>
+            <span>Matched Tier</span>
             <span className="font-bold">{selectedRow.label}</span>
           </div>
           <div className="hidden">
@@ -144,11 +165,11 @@ export default function CommissionCalculator() {
             </span>
           </div>
           <div className="flex justify-between border-b border-dashed pb-2">
-            <span className="text-gray-700">نسبة مكافأة صانع المحتوى %</span>
+            <span>نسبة مكافأة صانع المحتوى %</span>
             <span className="font-bold">{bonusPct}%</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-700">مكافأة صانع المحتوى بالدولار</span>
+            <span>مكافأة صانع المحتوى بالدولار</span>
             <span className="font-bold">
               $
               {streamerBonus.toLocaleString(undefined, {
@@ -157,9 +178,7 @@ export default function CommissionCalculator() {
             </span>
           </div>
           <div className="flex justify-between border-t border-dashed pt-2">
-            <span className="text-gray-700">
-              الراتب النهائي بالدولار مع المكأفاة
-            </span>
+            <span>الراتب النهائي بالدولار مع المكأفاة</span>
             <span className="font-bold">
               $
               {finalSalary.toLocaleString(undefined, {

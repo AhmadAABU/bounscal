@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "./ThemeContext.jsx";
 
 export default function OverlayExample() {
   const [open, setOpen] = useState(false);
-  const [dark, setDarkMode] = useState(() => {
-    return localStorage.getItem("theme") === "dark";
-  });
-  function toggleDarkMode() {
-    setDarkMode((prev) => !prev);
-  }
+  const { dark, toggleDark } = useTheme();
 
-  useEffect(() => {
-    if (dark) {
-      document.body.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [dark]);
   const TIERS = [
     {
       level: "Basic 👍",
@@ -102,12 +89,7 @@ export default function OverlayExample() {
                 ))}
               </div>
               <div className="absolute bottom-0 right-0 pr-2.5 pb-2.5">
-                <button
-                  className="toggle-mode text-md"
-                  onClick={toggleDarkMode}
-                >
-                  {dark ? "🌞" : "🌙"}
-                </button>
+                <button onClick={toggleDark}>{dark ? "🌞" : "🌙"}</button>
               </div>
             </motion.div>
           </motion.div>

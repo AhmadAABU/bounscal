@@ -94,17 +94,17 @@ export default function CommissionCalculator() {
   const finalSalary = Number(monthlyIncome) + streamerBonus;
 
   return (
-    <div className="flex h-screen justify-center items-center">
+    <div className="flex h-screen justify-center items-center px-4 md:px-0 ">
       <div className="w-full max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-md">
         <h2 className="text-xl font-semibold mb-4 text-center">
           حساب مكافأة صانع المحتوى لوكالة جو
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-[160px_1fr] gap-x-6 gap-y-3 mb-6 items-center">
-          <label className="text-sm">المستوى</label>
+          <label className="text-md">المستوى</label>
           <select
             value={level}
             onChange={(e) => setLevel(e.target.value)}
-            className="border rounded-md px-3 py-2 text-sm"
+            className="border rounded-md px-3 py-2 text-md"
           >
             {Object.keys(TIERS).map((k) => (
               <option key={k} value={k}>
@@ -113,24 +113,24 @@ export default function CommissionCalculator() {
             ))}
           </select>
 
-          <label className="text-sm">دخل الالماس الشهري</label>
+          <label className="text-md">دخل الالماس الشهري</label>
           <input
             type="number"
             min={0}
             value={monthlyDiamonds}
             onChange={(e) => setMonthlyDiamonds(e.target.value)}
-            className="border rounded-md px-3 py-2 text-sm"
+            className="border rounded-md px-3 py-2 text-md"
           />
 
-          <label className="text-sm">الراتب بالدولار بدون مكافأة</label>
+          <label className="text-md">الراتب بالدولار بدون مكافأة</label>
           <input
             type="number"
             value={monthlyIncome.toFixed(2)}
             readOnly
-            className="border rounded-md px-3 py-2 text-sm bg-gray-100"
+            className="border rounded-md px-3 py-2 text-md bg-gray-100"
           />
         </div>
-        <div className="bg-gray-50 border rounded-lg p-4 space-y-3">
+        <div className="bg-gray-50 border rounded-lg p-4 space-y-3 text-md">
           <div className="flex justify-between border-b border-dashed pb-2">
             <span className="text-gray-700">Matched Tier</span>
             <span className="font-bold">{selectedRow.label}</span>
@@ -157,7 +157,9 @@ export default function CommissionCalculator() {
             </span>
           </div>
           <div className="flex justify-between border-t border-dashed pt-2">
-            <span className="text-gray-700">الراتب النهائي بالدولار</span>
+            <span className="text-gray-700">
+              الراتب النهائي بالدولار مع المكأفاة
+            </span>
             <span className="font-bold">
               $
               {finalSalary.toLocaleString(undefined, {

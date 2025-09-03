@@ -1,8 +1,9 @@
 import { useState } from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeContext.jsx";
 
-export default function OverlayExample() {
+export default function Overlay() {
   const [open, setOpen] = useState(false);
   const { dark, toggleDark } = useTheme();
 

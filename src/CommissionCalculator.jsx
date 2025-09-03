@@ -132,7 +132,7 @@ export default function CommissionCalculator() {
             type="number"
             value={monthlyIncome.toFixed(2)}
             readOnly
-            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700"
+            className="border rounded-md px-3 py-2 text-md bg-[#8080805c] dark:bg-[#0810208f]"
           />
         </div>
         <div className="bg-gray-50 border rounded-lg p-4 space-y-3 text-md dark:bg-gray-700  dark:text-gray-100">

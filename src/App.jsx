@@ -1,12 +1,13 @@
 import CommissionCalculator from "./CommissionCalculator";
-import OverlayExample from "./Overlay";
+import Overlay from "./Overlay.jsx";
+
 import { ThemeProvider } from "./ThemeContext.jsx";
 
 function App() {
   return (
     <ThemeProvider>
       <CommissionCalculator />
-      <OverlayExample />
+      <Overlay />
     </ThemeProvider>
   );
 }

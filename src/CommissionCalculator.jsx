@@ -1,5 +1,6 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useTheme } from "./ThemeContext.jsx";
+import { Sun, Moon } from "lucide-react";
 
 const TIERS = {
   Basic: {
@@ -98,8 +99,17 @@ export default function CommissionCalculator() {
   return (
     <div className="bg-[#f3f3f3] flex h-screen justify-center items-center px-4 md:px-0 dark:bg-[#081020]">
       <div className="w-full max-w-3xl mx-auto p-4 sm:p-6 bg-white rounded-xl shadow-md relative dark:bg-gray-800 dark:text-gray-100 ">
-        <div className="absolute bottom-0 right-0 pr-2.5 pb-2.5">
-          <button onClick={toggleDark}>{dark ? "🌞" : "🌙"}</button>
+        <div className="absolute bottom-0 right-0 pr-3 pb-3">
+          <button
+            onClick={toggleDark}
+            className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center"
+          >
+            {dark ? (
+              <Sun className="w-5 h-5 text-yellow-500" />
+            ) : (
+              <Moon className="w-5 h-5 text-blue-400" />
+            )}
+          </button>
         </div>
         <h2 className="text-xl font-semibold mb-4 text-center">
           حساب مكافأة صانع المحتوى لوكالة جو
@@ -140,7 +150,8 @@ export default function CommissionCalculator() {
             <span>Matched Tier</span>
             <span className="font-bold">{selectedRow.label}</span>
           </div>
-          <div className="hidden">
+          <div className="flex justify-between border-b border-dashed pb-2 hidden">
+            <span>Agency Commission (USD)</span>
             <span className="font-bold">
               $
               {agencyUSD.toLocaleString(undefined, {
@@ -148,7 +159,7 @@ export default function CommissionCalculator() {
               })}
             </span>
           </div>
-          <div className="flex justify-between border-b border-dashed pb-2">
+          <div className="flex justify-between border-b border-dashed pb-2 hidden">
             <span>نسبة مكافأة صانع المحتوى %</span>
             <span className="font-bold">{bonusPct}%</span>
           </div>

@@ -2,6 +2,7 @@ import { useState } from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "./ThemeContext.jsx";
+import { Sun, Moon } from "lucide-react";
 
 export default function Overlay() {
   const [open, setOpen] = useState(false);
@@ -89,8 +90,17 @@ export default function Overlay() {
                   </div>
                 ))}
               </div>
-              <div className="absolute bottom-0 right-0 pr-2.5 pb-2.5">
-                <button onClick={toggleDark}>{dark ? "🌞" : "🌙"}</button>
+              <div className="absolute top-4 left-4 pr-3 pb-3">
+                <button
+                  onClick={toggleDark}
+                  className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center"
+                >
+                  {dark ? (
+                    <Sun className="w-5 h-5 text-yellow-500" />
+                  ) : (
+                    <Moon className="w-5 h-5 text-blue-400" />
+                  )}
+                </button>
               </div>
             </motion.div>
           </motion.div>

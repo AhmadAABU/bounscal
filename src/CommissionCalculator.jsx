@@ -102,7 +102,7 @@ export default function CommissionCalculator() {
         <div className="absolute bottom-0 right-0 pr-3 pb-3">
           <button
             onClick={toggleDark}
-            className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center"
+            className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center cursor-pointer"
           >
             {dark ? (
               <Sun className="w-5 h-5 text-yellow-500" />
@@ -119,7 +119,7 @@ export default function CommissionCalculator() {
           <select
             value={level}
             onChange={(e) => setLevel(e.target.value)}
-            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700"
+            className="border rounded-md px-3 py-2 text-md dark:bg-gray-700 cursor-pointer"
           >
             {Object.keys(TIERS).map((k) => (
               <option key={k} value={k}>
@@ -151,7 +151,11 @@ export default function CommissionCalculator() {
             <span className="font-bold">{selectedRow.label}</span>
           </div>
           <div className="flex justify-between border-b border-dashed pb-2 hidden">
-            <span>Agency Commission (USD)</span>
+            <span>النسبة كاملة %</span>
+            <span className="font-bold">{totalPct}%</span>
+          </div>
+          <div className="flex justify-between border-b border-dashed pb-2 hidden">
+            <span>عمولة الوكالة بالدولار</span>
             <span className="font-bold">
               $
               {agencyUSD.toLocaleString(undefined, {
@@ -159,7 +163,7 @@ export default function CommissionCalculator() {
               })}
             </span>
           </div>
-          <div className="flex justify-between border-b border-dashed pb-2 hidden">
+          <div className="flex justify-between border-b border-dashed pb-2">
             <span>نسبة مكافأة صانع المحتوى %</span>
             <span className="font-bold">{bonusPct}%</span>
           </div>

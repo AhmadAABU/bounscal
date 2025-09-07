@@ -38,7 +38,7 @@ export default function Overlay() {
     <div className="relative bg-gray-100 dark:bg-[#081020]">
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-1/2 right-0 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-l-lg shadow-lg hover:bg-blue-700 transition"
+        className="fixed top-1/2 right-0 -translate-y-1/2 bg-blue-600 text-white p-3 rounded-l-lg shadow-lg hover:bg-blue-700 transition cursor-pointer"
       >
         🔒
       </button>
@@ -59,7 +59,7 @@ export default function Overlay() {
             >
               <button
                 onClick={() => setOpen(false)}
-                className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition"
+                className="absolute top-4 right-4 bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition cursor-pointer"
               >
                 إغلاق ✖
               </button>
@@ -93,7 +93,7 @@ export default function Overlay() {
               <div className="absolute top-4 left-4 pr-3 pb-3">
                 <button
                   onClick={toggleDark}
-                  className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center"
+                  className="p-3 rounded-full shadow-md bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-transform duration-200 flex items-center justify-center cursor-pointer"
                 >
                   {dark ? (
                     <Sun className="w-5 h-5 text-yellow-500" />

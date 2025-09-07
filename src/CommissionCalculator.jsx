@@ -163,7 +163,7 @@ export default function CommissionCalculator() {
               })}
             </span>
           </div>
-          <div className="flex justify-between border-b border-dashed pb-2">
+          <div className="flex justify-between border-b border-dashed pb-2 hidden">
             <span>نسبة مكافأة صانع المحتوى %</span>
             <span className="font-bold">{bonusPct}%</span>
           </div>

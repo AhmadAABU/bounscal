@@ -68,7 +68,7 @@ const TIERS = {
   },
 };
 
-export default function CommissionCalculator() {
+export default function CommissionCalculator({ isAccountant }) {
   const [level, setLevel] = useState("Basic");
   const [monthlyDiamonds, setMonthlyDiamonds] = useState(0);
   const [monthlyIncome, setMonthlyIncome] = useState(0);
@@ -91,9 +91,9 @@ export default function CommissionCalculator() {
   const totalPct = selectedRow.totalPct;
   const bonusPct = TIERS[level].bonusPct;
   const income = Number(monthlyIncome) || 0;
-  const agencyUSD = (income * totalPct) / 100;
   const diamonds = Number(monthlyDiamonds) || 0;
   const streamerBonus = (diamonds / 200) * (totalPct / 100) * (bonusPct / 100);
+  const agencyUSD = (income * totalPct) / 100 - streamerBonus;
   const finalSalary = Number(monthlyIncome) + streamerBonus;
 
   return (
@@ -150,23 +150,27 @@ export default function CommissionCalculator() {
             <span>Matched Tier</span>
             <span className="font-bold">{selectedRow.label}</span>
           </div>
-          <div className="flex justify-between border-b border-dashed pb-2 hidden">
-            <span>النسبة كاملة %</span>
-            <span className="font-bold">{totalPct}%</span>
-          </div>
-          <div className="flex justify-between border-b border-dashed pb-2 hidden">
-            <span>عمولة الوكالة بالدولار</span>
-            <span className="font-bold">
-              $
-              {agencyUSD.toLocaleString(undefined, {
-                maximumFractionDigits: 2,
-              })}
-            </span>
-          </div>
-          <div className="flex justify-between border-b border-dashed pb-2 hidden">
-            <span>نسبة مكافأة صانع المحتوى %</span>
-            <span className="font-bold">{bonusPct}%</span>
-          </div>
+          {isAccountant && (
+            <>
+              <div className="flex justify-between border-b border-dashed pb-2">
+                <span>النسبة كاملة %</span>
+                <span className="font-bold">{totalPct}%</span>
+              </div>
+              <div className="flex justify-between border-b border-dashed pb-2">
+                <span>أرباح الوكالة بالدولار بعد خصم المكافأة</span>
+                <span className="font-bold">
+                  $
+                  {agencyUSD.toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
+              </div>
+              <div className="flex justify-between border-b border-dashed pb-2">
+                <span>نسبة مكافأة صانع المحتوى %</span>
+                <span className="font-bold">{bonusPct}%</span>
+              </div>
+            </>
+          )}
           <div className="flex justify-between">
             <span>مكافأة صانع المحتوى بالدولار</span>
             <span className="font-bold">

@@ -1,7 +1,7 @@
 import CommissionCalculator from "./CommissionCalculator";
 import Overlay from "./Overlay.jsx";
 import { ThemeProvider } from "./ThemeContext.jsx";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -9,11 +9,11 @@ function App() {
       <Router>
         <Routes>
           <Route
-            path="/bounscal"
+            path="/"
             element={<CommissionCalculator isAccountant={false} />}
           />
           <Route
-            path="/bounscal/jo"
+            path="/jo"
             element={<CommissionCalculator isAccountant={true} />}
           />
         </Routes>
